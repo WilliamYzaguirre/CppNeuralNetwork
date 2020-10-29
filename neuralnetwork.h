@@ -21,23 +21,37 @@ public:
 
     std::vector<double> getRandomDoubleVector(int count, double high);
 
-    void train(std::vector<std::vector<double>> trainInput, std::vector<double> trainLabel, int eta, int batchSize=32, int epochNumber=32);
+    void train(const std::vector<std::vector<double>>& trainInput, const std::vector<double>& trainLabel, double eta, int batchSize=32, int epochNumber=32);
 
-    void test(std::vector<std::vector<double>> testInput, std::vector<double> testLabel);
+    void test(const std::vector<std::vector<double>>& testInput, const std::vector<double>& testLabel);
 
     //void printNetwork();
 
     //std::vector<std::vector<double>> getRandomWeightMatrix(int inputs, int neurons, double low, double high);
 
-    std::vector<double> sigmoid(std::vector<double> v);
+    std::vector<double> sigmoid(const std::vector<double>& v);
 
-    std::vector<double> sigmoidPrime(std::vector<double> v);
+    std::vector<double> sigmoidPrime(const std::vector<double>& v);
+
+    std::vector<double> relu(const std::vector<double>& v);
+
+    std::vector<double> reluPrime(const std::vector<double>& v);
 
     std::vector<double> getDoubleVector(int count, double value);
 
-    std::vector<double> costFunction(std::vector<double> output, std::vector<double> y);
+    double MSElossFunction(const std::vector<double>& output, const std::vector<double>& y);
 
-    std::vector<double> costDerivative(std::vector<double> output, std::vector<double> y);
+    std::vector<double> MSElossDerivative(const std::vector<double>& output, const std::vector<double>& y);
+
+    std::vector<double> SoftMax(const std::vector<double>& z);
+
+    std::vector<double> SoftMaxDerivative(const std::vector<double>& z);
+
+    double crossEntropyLoss(const std::vector<double>& output, const std::vector<double>& y);
+
+    std::vector<double> crossEntropyLossDeriv(const std::vector<double>& output, const std::vector<double>& y);
+
+
 
     //std::vector<double> forwardPass(Layer layer, std::vector<double> input);
 
@@ -52,6 +66,7 @@ private:
     int inputCount;
     int batchSize;
     int epochNumber;
+    int currentBatchSize;
 
     //std::uniform_real_distribution<> dis{-1, 1};
 

@@ -5,24 +5,24 @@
 #include <iostream>
 #include <math.h>
 
-double vectorDotProduct(std::vector<double> v1, std::vector<double> v2);
+double vectorDotProduct(const std::vector<double>& v1, const std::vector<double>& v2) noexcept;
 
-std::vector<double> vectorMatrixMult(std::vector<std::vector<double>> m, std::vector<double> v);
+std::vector<double> vectorMatrixMult(const std::vector<std::vector<double>>& m, const std::vector<double>& v) noexcept;
 
-std::vector<double> vectorAdd(std::vector<double> v1, std::vector<double> v2);
+std::vector<double> vectorAdd(const std::vector<double>& v1, const std::vector<double>& v2) noexcept;
 
-std::vector<double> vectorSubtract(std::vector<double> v1, std::vector<double> v2);
+std::vector<double> vectorSubtract(const std::vector<double>& v1, const std::vector<double>& v2) noexcept;
 
-std::vector<double> hadamardVector(std::vector<double> v1, std::vector<double> v2);
+std::vector<double> hadamardVector(const std::vector<double>& v1, const std::vector<double>& v2) noexcept;
 
-double vectorSum(std::vector<double> v1);
+double vectorSum(const std::vector<double>& v1) noexcept;
 
-std::vector<std::vector<double>> vectorTransposeMult(std::vector<double> v1, std::vector<double> v2);
+std::vector<std::vector<double>> vectorTransposeMult(const std::vector<double>& v1, const std::vector<double>& v2) noexcept;
 
-std::vector<std::vector<double>> matrixTranspose(std::vector<std::vector<double>> m);
+std::vector<std::vector<double>> matrixTranspose(const std::vector<std::vector<double>>& m) noexcept;
 
 void normalizeVector(std::vector<double>& v);
 
-std::vector<double> averageVectors(std::vector<std::vector<double>> vectors);
+std::vector<double> averageVectors(const std::vector<std::vector<double>>& vectors) noexcept;
 
 #endif // VECTOROPERATIONS_H

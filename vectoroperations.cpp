@@ -1,6 +1,6 @@
 #include "vectoroperations.h"
 
-double vectorDotProduct(std::vector<double> v1, std::vector<double> v2)
+double vectorDotProduct(const std::vector<double>& v1, const std::vector<double>& v2) noexcept
 {
     if (v2.size() != v1.size())
     {
@@ -18,7 +18,7 @@ double vectorDotProduct(std::vector<double> v1, std::vector<double> v2)
     }
 }
 
-std::vector<double> vectorMatrixMult(std::vector<std::vector<double>> m, std::vector<double> v)
+std::vector<double> vectorMatrixMult(const std::vector<std::vector<double>>& m, const std::vector<double>& v) noexcept
 {
     std::vector<double> ret;
     for (auto mvector : m)
@@ -37,7 +37,7 @@ std::vector<double> vectorMatrixMult(std::vector<std::vector<double>> m, std::ve
 }
 
 
-std::vector<double> vectorAdd(std::vector<double> v1, std::vector<double> v2)
+std::vector<double> vectorAdd(const std::vector<double>& v1, const std::vector<double>& v2) noexcept
 {
     std::vector<double> ret;
     if (v2.size() != v1.size())
@@ -55,7 +55,7 @@ std::vector<double> vectorAdd(std::vector<double> v1, std::vector<double> v2)
     }
 }
 
-std::vector<double> vectorSubtract(std::vector<double> v1, std::vector<double> v2)
+std::vector<double> vectorSubtract(const std::vector<double>& v1, const std::vector<double>& v2) noexcept
 {
     std::vector<double> ret;
     if (v2.size() != v1.size())
@@ -73,7 +73,7 @@ std::vector<double> vectorSubtract(std::vector<double> v1, std::vector<double> v
     }
 }
 
-std::vector<double> hadamardVector(std::vector<double> v1, std::vector<double> v2)
+std::vector<double> hadamardVector(const std::vector<double>& v1, const std::vector<double>& v2) noexcept
 {
     std::vector<double> ret;
     if (v2.size() != v1.size())
@@ -91,7 +91,7 @@ std::vector<double> hadamardVector(std::vector<double> v1, std::vector<double> v
     }
 }
 
-double vectorSum(std::vector<double> v1)
+double vectorSum(const std::vector<double>& v1) noexcept
 {
     double ret = 0;
 
@@ -102,7 +102,7 @@ double vectorSum(std::vector<double> v1)
     return ret;
 }
 
-std::vector<std::vector<double> > vectorTransposeMult(std::vector<double> v1, std::vector<double> v2)
+std::vector<std::vector<double> > vectorTransposeMult(const std::vector<double>& v1, const std::vector<double>& v2) noexcept
 {
     std::vector<std::vector<double>> ret;
 
@@ -119,7 +119,7 @@ std::vector<std::vector<double> > vectorTransposeMult(std::vector<double> v1, st
 
 }
 
-std::vector<std::vector<double> > matrixTranspose(std::vector<std::vector<double> > m)
+std::vector<std::vector<double> > matrixTranspose(const std::vector<std::vector<double>>& m) noexcept
 {
     std::vector<std::vector<double>> ret;
     for (int i = 0; i < m[0].size(); ++i)
@@ -142,14 +142,23 @@ void normalizeVector(std::vector<double> &v)
     {
         total += vi*vi;
     }
-    total = std::sqrt(total);
-    for (auto vi : v)
+    if (total != 0)
     {
-        vi = vi / total;
+        total = std::sqrt(total);
+        for (int i = 0; i < v.size(); ++i)
+        {
+            if (total == 0 && v[i] == 0)
+            {
+                std::cout << "Total: " << total << ", V[i]: " << v[i] << std::endl;
+                std::cout << "Yup, we got a problem: " << (v[i] / total) << std::endl;
+            }
+            v[i] = v[i] / total;
+        }
     }
+
 }
 
-std::vector<double> averageVectors(std::vector<std::vector<double>> vectors)
+std::vector<double> averageVectors(const std::vector<std::vector<double>>& vectors) noexcept
 {
     std::vector<double> ret;
     for (auto v : vectors)
@@ -161,4 +170,5 @@ std::vector<double> averageVectors(std::vector<std::vector<double>> vectors)
         }
         ret.push_back(total / vectors.size());
     }
+    return ret;
 }

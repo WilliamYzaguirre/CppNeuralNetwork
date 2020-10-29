@@ -103,15 +103,25 @@ int main(int argc, char *argv[])
     //im1.show();
 
     //int layerCount, int neuronCount, int targetCount, int inputCount
-    //NeuralNetwork nn{1, 4, 10, 784};
-    NeuralNetwork nn{2, 2, 2, 2};
+    NeuralNetwork nn{2, 128, 10, 784};
+
+    std::vector<std::vector<double>> shortTrain;
+    std::vector<double> shortLabel;
+    for (int i = 0; i < 500; ++i)
+    {
+        shortTrain.push_back(trainingImages[i*2]);
+        shortLabel.push_back(trainingLabels[i*2]);
+    }
+
+
 
     //nn.printNetwork();
-    //nn.test(testImages, testLabels);
-    //nn.train(trainingImages, trainingLabels, 32, 16, 500);
+    nn.test(testImages, testLabels);
+    nn.train(shortTrain, shortLabel, .01, 64, 100);
+
     //inputs, label, eta, batchsize, epoch
-    nn.train(inputs, outputs, 1, 1, 2);
-    //nn.test(testImages, testLabels);
+
+    nn.test(testImages, testLabels);
 
 
     return a.exec();
